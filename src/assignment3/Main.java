@@ -21,7 +21,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Scanner kb = new Scanner(System.in);
-		
+		ArrayList<String> temp = getWordLadderBFS("HEART", "WANES");
+		if(temp != null){ System.out.println(temp); }
 		// TODO methods to read in words, output ladder
 
 	}
@@ -40,39 +41,39 @@ public class Main {
 		
 		/* Converts the dictionary into an ArrayList with only words that are the same length as start/end */
 		Set<String> dict = makeDictionary();
-		String[] temp = null;
+		String[] temp = new String[0];
 		ArrayList<String> modifiedDict = filterDictionary(start.length(), dict.toArray(temp));
 		
 		/* Actual BFS tree generation */
-		Queue<ArrayList<String>> queueBFS = new LinkedList<ArrayList<String>>();
+		Queue<Ladder> queueBFS = new LinkedList<Ladder>();
 		Blacklist visited = new Blacklist();
 		ArrayList<String> firstLadder = new ArrayList<String>();
-		firstLadder.add(start);
-		queueBFS.add(firstLadder);				//Treat start as the first "node"
+		queueBFS.add(new Ladder(start));				//Treat start as the first "node"
 		
 		/* BFS terminates when there are no more possible paths to check from */
 		while(!queueBFS.isEmpty()){
 			
 			/* Check the head of the queue for the desired end */
-			if(queueBFS.element().get(queueBFS.element().size()-1) == end){
-				return queueBFS.remove();
+			if(queueBFS.element().getLastWord().equals(end)){
+				return queueBFS.remove().toArrList();
 			}
 			
 			/* If the head has been visited */
-			else if(visited.containsWord(queueBFS.element().get(queueBFS.element().size()-1))){
+			else if(visited.containsWord(queueBFS.element().getLastWord())){
 				queueBFS.remove();
 			}
 			
 			/* If we have to continue searching and we have not visited the head yet */
 			else{
 				/* Prevent searching of this word again */
-				visited.addWord(queueBFS.element().get(queueBFS.element().size()-1));
-				ArrayList<String> copyLadder = queueBFS.remove();
+				visited.addWord(queueBFS.element().getLastWord());
+				Ladder originLadder = queueBFS.remove();
 				/* Search exhaustively through all the neighboring words */
-				Neighbors toCheck = new Neighbors(copyLadder.get(copyLadder.size()-1),  modifiedDict);
-				for(int i = 0; i < toCheck.getSize(); i+=1){	
+				Neighbors toCheck = new Neighbors(originLadder.getLastWord(),  modifiedDict);
+				for(int i = 0; i < toCheck.getSize(); i+=1){
+					Ladder copyLadder = new Ladder(originLadder.toArrList());
 					if(!visited.containsWord(toCheck.getNeighboringWords().get(i))){	//Ignores words we already checked
-						copyLadder.add(toCheck.getWord(i));
+						copyLadder.addLastWord(toCheck.getWord(i));
 						queueBFS.add(copyLadder);
 						//queueBFS.add(toCheck.getWord(i));
 					}
@@ -88,7 +89,7 @@ public class Main {
 		Set<String> words = new HashSet<String>();
 		Scanner infile = null;
 		try {
-			infile = new Scanner (new File("short_dict.txt"));
+			infile = new Scanner (new File("five_letter_words.txt"));
 		} catch (FileNotFoundException e) {
 			System.out.println("Dictionary File not Found!");
 			e.printStackTrace();
