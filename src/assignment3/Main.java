@@ -44,42 +44,44 @@ public class Main {
 		ArrayList<String> modifiedDict = filterDictionary(start.length(), dict.toArray(temp));
 		
 		/* Actual BFS tree generation */
-		Queue<String> queueBFS = new LinkedList<String>();
+		Queue<ArrayList<String>> queueBFS = new LinkedList<ArrayList<String>>();
 		Blacklist visited = new Blacklist();
-		queueBFS.add(start);				//Treat start as the first "node"
+		ArrayList<String> firstLadder = new ArrayList<String>();
+		firstLadder.add(start);
+		queueBFS.add(firstLadder);				//Treat start as the first "node"
 		
 		/* BFS terminates when there are no more possible paths to check from */
 		while(!queueBFS.isEmpty()){
 			
 			/* Check the head of the queue for the desired end */
-			if(queueBFS.element() == end){
-				queueBFS.remove();
-				break;
+			if(queueBFS.element().get(queueBFS.element().size()-1) == end){
+				return queueBFS.remove();
 			}
 			
 			/* If the head has been visited */
-			else if(visited.containsWord(queueBFS.element())){
+			else if(visited.containsWord(queueBFS.element().get(queueBFS.element().size()-1))){
 				queueBFS.remove();
 			}
 			
 			/* If we have to continue searching and we have not visited the head yet */
 			else{
 				/* Prevent searching of this word again */
-				visited.addWord(queueBFS.element());
-				
+				visited.addWord(queueBFS.element().get(queueBFS.element().size()-1));
+				ArrayList<String> copyLadder = queueBFS.remove();
 				/* Search exhaustively through all the neighboring words */
-				Neighbors toCheck = new Neighbors(queueBFS.element(), modifiedDict);
+				Neighbors toCheck = new Neighbors(copyLadder.get(copyLadder.size()-1),  modifiedDict);
 				for(int i = 0; i < toCheck.getSize(); i+=1){	
 					if(!visited.containsWord(toCheck.getNeighboringWords().get(i))){	//Ignores words we already checked
-						queueBFS.add(toCheck.getWord(i));
+						copyLadder.add(toCheck.getWord(i));
+						queueBFS.add(copyLadder);
+						//queueBFS.add(toCheck.getWord(i));
 					}
 				}
 			}
 		}
 		
 		/* Report not found */
-		
-		return null; // replace this line later with real return
+		return null; 
 	}
     
 	public static Set<String>  makeDictionary () {
