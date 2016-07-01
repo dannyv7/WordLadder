@@ -1,6 +1,11 @@
 package assignment3;
 
 import java.util.*;
+/**
+ * Class to aid in interaction with all 'Neighboring' words of a word (1 letter difference)
+ * @author Danny Vo
+ *
+ */
 public class Neighbors {
 	private ArrayList<String> validWords = new ArrayList<String>();
 	private int size =0;
@@ -46,10 +51,22 @@ public class Neighbors {
 		}else{ return true; }
 	}
 	
+	/**
+	 * How many neighboring words are there
+	 * @return
+	 * 		Number of 1-letter difference words
+	 */
 	public int getSize(){
 		return size;
 	}
 	
+	/**
+	 * Access a neighboring word at a given index
+	 * @param idx
+	 * 		Where in the neighbor array to retrieve
+	 * @return
+	 * 		String of the neighbord word at the given index
+	 */
 	public String getWord(int idx){
 		return validWords.get(idx);
 	}

@@ -21,8 +21,10 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Scanner kb = new Scanner(System.in);
-		ArrayList<String> temp = getWordLadderBFS("HEART", "WANES");
-		if(temp != null){ System.out.println(temp); }
+		ArrayList<String> tempB = getWordLadderBFS("HEART", "TWAIN");
+		if(tempB != null){ System.out.println(tempB); }
+		ArrayList<String> tempD = getWordLadderDFS("HEART", "TWAIN");
+		if(tempD != null){ System.out.println(tempD); }
 		// TODO methods to read in words, output ladder
 
 	}
@@ -31,9 +33,11 @@ public class Main {
 		
 		/* Converts the dictionary into an ArrayList with only words that are the same length as start/end */
 		Set<String> dict = makeDictionary();
-		String[] temp = null;
+		String[] temp = new String[0];
 		ArrayList<String> modifiedDict = filterDictionary(start.length(), dict.toArray(temp));
-		return null; // replace this line later with real return
+		DFSTree DFSladder = new DFSTree(modifiedDict, end, start);
+		Ladder startLadder = new Ladder(start);
+		return DFSladder.runDFS(startLadder).toArrList();
 	}
 	
 	public static ArrayList<String> getWordLadderBFS(String start, String end) {

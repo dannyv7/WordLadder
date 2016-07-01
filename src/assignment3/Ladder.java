@@ -1,6 +1,12 @@
 package assignment3;
 
 import java.util.*;
+/**
+ * Essentially just an ArrayList <String> for all the components of the building word ladder
+ * Contains methods to make accesses significantly easier 
+ * @author Danny Vo
+ *
+ */
 public class Ladder {
 	private ArrayList<String> rungs = new ArrayList<String>(0);
 	

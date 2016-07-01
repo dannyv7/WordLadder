@@ -1,6 +1,11 @@
 package assignment3;
 
 import java.util.*;
+/**
+ * HashSet<String> to contain words already attempted and avoid
+ * @author Danny Vo
+ *
+ */
 public class Blacklist {
 	private Set<String> alreadyVisited = new HashSet<String>();
 	
@@ -11,6 +16,28 @@ public class Blacklist {
 	 */
 	public void addWord(String s){
 		alreadyVisited.add(s);
+	}
+	
+	/**
+	 * Temporarily adds elements to the blacklist to indicate incursion has not been finished
+	 * @param s
+	 * 	ArrayList<String> of elements to add
+	 */
+	public void visitInProgress(ArrayList<String> s){
+		for(int i = 0; i < s.size(); i+= 1){
+			alreadyVisited.add(s.get(i));
+		}
+	}
+	
+	/**
+	 * Remove elements added by visitInProgress
+	 * @param s
+	 * 	ArrayList<String> of elements to remove
+	 */
+	public void removeInProgress(ArrayList<String>s){
+		for(int i = 0; i < s.size(); i+= 1){
+			alreadyVisited.remove(s.get(i));
+		}
 	}
 	
 	
