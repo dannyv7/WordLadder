@@ -4,8 +4,8 @@
  * <Student1 Name>
  * <Student1 EID>
  * <Student1 5-digit Unique No.>
- * <Student2 Name>
- * <Student2 EID>
+ * James Tsao
+ * jt28593
  * <Student2 5-digit Unique No.>
  * Slip days used: <0>
  * Fall 2015
