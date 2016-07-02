@@ -12,7 +12,7 @@ public class Blacklist {
 	/**
 	 * Adds a word to the Blacklist, which contains all words that we have attempted to tree from
 	 * @param s
-	 * 		The String to add
+	 * 	The String to add
 	 */
 	public void addWord(String s){
 		alreadyVisited.add(s);
@@ -44,9 +44,9 @@ public class Blacklist {
 	/**
 	 * Determine if a String has already been "visited"
 	 * @param s
-	 * 		String to check
+	 * 	String to check
 	 * @return
-	 * 		True if the String has already been visited, false otherwise
+	 * 	True if the String has already been visited, false otherwise
 	 */
 	public boolean containsWord(String s){
 		return alreadyVisited.contains(s);
