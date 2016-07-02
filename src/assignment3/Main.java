@@ -21,9 +21,9 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Scanner kb = new Scanner(System.in);
-		ArrayList<String> tempB = getWordLadderBFS("HEART", "TWAIN");
+		ArrayList<String> tempB = getWordLadderBFS("HEART", "SMART");
 		if(tempB != null){ System.out.println(tempB); }
-		ArrayList<String> tempD = getWordLadderDFS("HEART", "TWAIN");
+		ArrayList<String> tempD = getWordLadderDFS("HEART", "SMART");
 		if(tempD != null){ System.out.println(tempD); }
 		// TODO methods to read in words, output ladder
 
@@ -73,7 +73,7 @@ public class Main {
 				visited.addWord(queueBFS.element().getLastWord());
 				Ladder originLadder = queueBFS.remove();
 				/* Search exhaustively through all the neighboring words */
-				Neighbors toCheck = new Neighbors(originLadder.getLastWord(),  modifiedDict);
+				Neighbors toCheck = new Neighbors(originLadder.getLastWord(),  modifiedDict, visited);
 				for(int i = 0; i < toCheck.getSize(); i+=1){
 					Ladder copyLadder = new Ladder(originLadder.toArrList());
 					if(!visited.containsWord(toCheck.getNeighboringWords().get(i))){	//Ignores words we already checked
