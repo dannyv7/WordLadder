@@ -26,9 +26,9 @@ public class DFSTree {
 	/**
 	 * Recursive based Depth First Search method
 	 * @param l
-	 * 		Ladder object 
+	 * 	Ladder object 
 	 * @return
-	 * 		Either the completed WordLadder or null if cannot be created
+	 * 	Either the completed WordLadder or null if cannot be created
 	 */
 	public Ladder runDFS(Ladder l){
 		
