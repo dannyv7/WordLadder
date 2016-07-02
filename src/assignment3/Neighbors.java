@@ -54,7 +54,7 @@ public class Neighbors {
 	/**
 	 * How many neighboring words are there
 	 * @return
-	 * 		Number of 1-letter difference words
+	 * 	Number of 1-letter difference words
 	 */
 	public int getSize(){
 		return size;
@@ -63,9 +63,9 @@ public class Neighbors {
 	/**
 	 * Access a neighboring word at a given index
 	 * @param idx
-	 * 		Where in the neighbor array to retrieve
+	 * 	Where in the neighbor array to retrieve
 	 * @return
-	 * 		String of the neighbord word at the given index
+	 * 	String of the neighbord word at the given index
 	 */
 	public String getWord(int idx){
 		return validWords.get(idx);
