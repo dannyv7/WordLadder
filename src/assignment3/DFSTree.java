@@ -8,13 +8,13 @@ import java.util.*;
  *
  */
 public class DFSTree {
-	private ArrayList<String> dictionary = null;
+	private Set<String> dictionary = null;
 	private Blacklist visited = new Blacklist();
 	private String target;
 	private int maxLen;
 	
-	public DFSTree (ArrayList<String> d, String e, String s){
-		dictionary  = d;
+	public DFSTree (Set<String> dict, String e, String s){
+		dictionary  = dict;
 		target = e;
 		maxLen = Main.getWordLadderBFS(s, e).size() * 2;
 	}
@@ -33,15 +33,15 @@ public class DFSTree {
 	public Ladder runDFS(Ladder l){
 		
 		/* Prevent searching on the newest added word to the ladder again */
-		visited.addWord(l.getLastWord());
-		
+		//visited.addWord(l.getLastWord());
+		dictionary.remove(l.getLastWord());
 		/* DFS part, search down each neighbor path */
-		Neighbors toCheck = new Neighbors(l.getLastWord(), dictionary, visited);
-		if(toCheck.getSize() == 0){ return l; }		
+		Neighbors toCheck = new Neighbors(l.getLastWord(), dictionary);
+		if(toCheck.getSize() == 0){ return l; }	//Hit deadend	
 		for(int i = 0; i < toCheck.getSize(); i +=1){
 			
 			/* Launch recursive search if neighbor is unexplored */
-			if(!visited.containsWord(toCheck.getWord(i))){
+			if(dictionary.contains(toCheck.getWord(i))){
 				
 				/* Generates instances of building ladders until the correct one is found or run out of words */
 				Ladder temp = new Ladder(l.toArrList());

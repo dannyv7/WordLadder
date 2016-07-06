@@ -9,23 +9,24 @@ import java.util.*;
 public class Neighbors {
 	private ArrayList<String> validWords = new ArrayList<String>();
 	private int size =0;
+	
 	/**
 	 * Constructor  for the Neighbors class which contains all "neighbor" nodes to a given node
-	 * @param s
+	 * @param lastWord
 	 * 	The String to find the neighbors to
 	 * @param dictionary
 	 * 	Modified dictionary ArrayList<String> that contains only Strings of the same length as s
 	 */
-	public Neighbors(String s, ArrayList<String> dictionary, Blacklist b){
-		for(int i = 0; i < dictionary.size(); i+= 1){
-			if (isValid(s, dictionary.get(i)) && !b.containsWord(dictionary.get(i))){
-				validWords.add(dictionary.get(i));
+	public Neighbors(String lastWord, Set<String> dictionary) {
+		for(String s: dictionary){
+			if(isValid(lastWord, s)){
+				validWords.add(s);
 			}
 		}
 		size = validWords.size();
 	}
-	
-	
+
+
 	public ArrayList<String> getNeighboringWords(){
 		return validWords;
 	}
