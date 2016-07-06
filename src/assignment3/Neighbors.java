@@ -16,9 +16,9 @@ public class Neighbors {
 	 * @param dictionary
 	 * 	Modified dictionary ArrayList<String> that contains only Strings of the same length as s
 	 */
-	public Neighbors(String s, ArrayList<String> dictionary){
+	public Neighbors(String s, ArrayList<String> dictionary, Blacklist b){
 		for(int i = 0; i < dictionary.size(); i+= 1){
-			if (isValid(s, dictionary.get(i))){
+			if (isValid(s, dictionary.get(i)) && !b.containsWord(dictionary.get(i))){
 				validWords.add(dictionary.get(i));
 			}
 		}

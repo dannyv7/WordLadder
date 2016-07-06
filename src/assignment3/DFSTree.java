@@ -36,7 +36,8 @@ public class DFSTree {
 		visited.addWord(l.getLastWord());
 		
 		/* DFS part, search down each neighbor path */
-		Neighbors toCheck = new Neighbors(l.getLastWord(), dictionary);
+		Neighbors toCheck = new Neighbors(l.getLastWord(), dictionary, visited);
+		if(toCheck.getSize() == 0){ return l; }		
 		for(int i = 0; i < toCheck.getSize(); i +=1){
 			
 			/* Launch recursive search if neighbor is unexplored */
@@ -52,7 +53,7 @@ public class DFSTree {
 				}
 				/* Don't make the DFS too long...temporary solution */
 				else if(temp.toArrList().size() >= maxLen){
-					//return temp;
+					
 				}
 				/* Recursive search, return ladder if correct */
 				else{
