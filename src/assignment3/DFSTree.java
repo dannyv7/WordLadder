@@ -37,34 +37,41 @@ public class DFSTree {
 		dictionary.remove(l.getLastWord());
 		/* DFS part, search down each neighbor path */
 		Neighbors toCheck = new Neighbors(l.getLastWord(), dictionary);
-		if(toCheck.getSize() == 0){ return l; }	//Hit deadend	
+		if(toCheck.getSize() == 0){
+			l.removeLastWord();
+			return l; }	//Hit deadend	
+		
+		/* Remove neighbor words from the dictionary; we know we will go over them in the iteration anyway, so there is no point in wasting recursive calls to them */
+		for(int i = 0; i <toCheck.getSize(); i ++){
+			dictionary.remove(toCheck.getWord(i));
+		}
+		
+		/* Recursive DFS */
 		for(int i = 0; i < toCheck.getSize(); i +=1){
 			
 			/* Launch recursive search if neighbor is unexplored */
-			if(dictionary.contains(toCheck.getWord(i))){
+			dictionary.add(toCheck.getWord(i));
 				
-				/* Generates instances of building ladders until the correct one is found or run out of words */
-				Ladder temp = new Ladder(l.toArrList());
-				temp.addLastWord(toCheck.getWord(i));
+			/* Generates instances of building ladders until the correct one is found or run out of words */
+			Ladder temp = new Ladder(l.toArrList());
+			temp.addLastWord(toCheck.getWord(i));
 				
-				/* Instant return if adding a word creates the ladder */
-				if(temp.getLastWord().equals(target)){
+			/* Instant return if adding a word creates the ladder */
+			if(temp.getLastWord().equals(target)){
+				return temp;
+			}
+			/* Don't make the DFS too long...temporary solution */
+			//else if(temp.toArrList().size() >= maxLen){
+				
+			//}
+			/* Recursive search, return ladder if correct */
+			else{
+				temp = runDFS(temp);
+				if(temp != null && temp.getLastWord().equals(target)){
 					return temp;
-				}
-				/* Don't make the DFS too long...temporary solution */
-				else if(temp.toArrList().size() >= maxLen){
-					
-				}
-				/* Recursive search, return ladder if correct */
-				else{
-					temp = runDFS(temp);
-					if(temp != null && temp.getLastWord().equals(target)){
-						return temp;
-					}
 				}
 			}
 		}
-		
 		return null;
 	}
 		

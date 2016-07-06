@@ -25,7 +25,6 @@ public class Main {
 		if(tempB != null){ System.out.println(tempB); }
 		ArrayList<String> tempD = getWordLadderDFS("HEART", "SMART");
 		if(tempD != null){ System.out.println(tempD); }
-		// TODO methods to read in words, output ladder
 
 	}
 	
@@ -33,6 +32,11 @@ public class Main {
 		
 		/* Converts the dictionary into an ArrayList with only words that are the same length as start/end */
 		Set<String> dict = makeDictionary();
+		for(String s: dict){
+			if (s.length() != start.length()){ 
+				dict.remove(s);
+			}
+		}
 	//	String[] temp = new String[0];
 	//	ArrayList<String> modifiedDict = filterDictionary(start.length(), dict.toArray(temp));
 		DFSTree DFSladder = new DFSTree(dict, end, start);
@@ -45,6 +49,11 @@ public class Main {
 		
 		/* Converts the dictionary into an ArrayList with only words that are the same length as start/end */
 		Set<String> dict = makeDictionary();
+		for(String s: dict){
+			if (s.length() != start.length()){ 
+				dict.remove(s);
+			}
+		}
 		//String[] temp = new String[0];
 		//ArrayList<String> modifiedDict = filterDictionary(start.length(), dict.toArray(temp));
 		
