@@ -17,6 +17,7 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+	private final static boolean debug = false;
 
 	public static void main(String[] args) {
 		
@@ -103,7 +104,12 @@ public class Main {
 		Set<String> words = new HashSet<String>();
 		Scanner infile = null;
 		try {
-			infile = new Scanner (new File("five_letter_words.txt"));
+			if(debug){
+				infile = new Scanner (new File("five_letter_words_subset.txt"));
+			}
+			else{
+				infile = new Scanner (new File("five_letter_words.txt"));
+			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Dictionary File not Found!");
 			e.printStackTrace();
