@@ -4,8 +4,8 @@
  * <Student1 Name>
  * <Student1 EID>
  * <Student1 5-digit Unique No.>
- * <Student2 Name>
- * <Student2 EID>
+ * James Tsao
+ * jt28593
  * <Student2 5-digit Unique No.>
  * Slip days used: <0>
  * Fall 2015
@@ -17,6 +17,7 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+	private final static boolean debug = false;
 
 	public static void main(String[] args) {
 		
@@ -103,7 +104,12 @@ public class Main {
 		Set<String> words = new HashSet<String>();
 		Scanner infile = null;
 		try {
-			infile = new Scanner (new File("five_letter_words.txt"));
+			if(debug){
+				infile = new Scanner (new File("five_letter_words_subset.txt"));
+			}
+			else{
+				infile = new Scanner (new File("five_letter_words.txt"));
+			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Dictionary File not Found!");
 			e.printStackTrace();
