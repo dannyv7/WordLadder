@@ -25,7 +25,6 @@ public class Main {
 		if(tempB != null){ System.out.println(tempB); }
 		ArrayList<String> tempD = getWordLadderDFS("HEART", "SMART");
 		if(tempD != null){ System.out.println(tempD); }
-		// TODO methods to read in words, output ladder
 
 	}
 	
@@ -33,9 +32,14 @@ public class Main {
 		
 		/* Converts the dictionary into an ArrayList with only words that are the same length as start/end */
 		Set<String> dict = makeDictionary();
-		String[] temp = new String[0];
-		ArrayList<String> modifiedDict = filterDictionary(start.length(), dict.toArray(temp));
-		DFSTree DFSladder = new DFSTree(modifiedDict, end, start);
+		for(String s: dict){
+			if (s.length() != start.length()){ 
+				dict.remove(s);
+			}
+		}
+	//	String[] temp = new String[0];
+	//	ArrayList<String> modifiedDict = filterDictionary(start.length(), dict.toArray(temp));
+		DFSTree DFSladder = new DFSTree(dict, end, start);
 		Ladder startLadder = new Ladder(start);
 		return DFSladder.runDFS(startLadder).toArrList();
 	}
@@ -45,12 +49,17 @@ public class Main {
 		
 		/* Converts the dictionary into an ArrayList with only words that are the same length as start/end */
 		Set<String> dict = makeDictionary();
-		String[] temp = new String[0];
-		ArrayList<String> modifiedDict = filterDictionary(start.length(), dict.toArray(temp));
+		for(String s: dict){
+			if (s.length() != start.length()){ 
+				dict.remove(s);
+			}
+		}
+		//String[] temp = new String[0];
+		//ArrayList<String> modifiedDict = filterDictionary(start.length(), dict.toArray(temp));
 		
 		/* Actual BFS tree generation */
 		Queue<Ladder> queueBFS = new LinkedList<Ladder>();
-		Blacklist visited = new Blacklist();
+		//Blacklist visited = new Blacklist();
 		ArrayList<String> firstLadder = new ArrayList<String>();
 		queueBFS.add(new Ladder(start));				//Treat start as the first "node"
 		
@@ -63,20 +72,21 @@ public class Main {
 			}
 			
 			/* If the head has been visited */
-			else if(visited.containsWord(queueBFS.element().getLastWord())){
+			else if(!dict.contains(queueBFS.element().getLastWord())){
 				queueBFS.remove();
 			}
 			
 			/* If we have to continue searching and we have not visited the head yet */
 			else{
 				/* Prevent searching of this word again */
-				visited.addWord(queueBFS.element().getLastWord());
+				dict.remove(queueBFS.element().getLastWord());
 				Ladder originLadder = queueBFS.remove();
 				/* Search exhaustively through all the neighboring words */
-				Neighbors toCheck = new Neighbors(originLadder.getLastWord(),  modifiedDict, visited);
+				//Neighbors toCheck = new Neighbors(originLadder.getLastWord(),  modifiedDict, visited);
+				Neighbors toCheck = new Neighbors(originLadder.getLastWord(), dict);
 				for(int i = 0; i < toCheck.getSize(); i+=1){
 					Ladder copyLadder = new Ladder(originLadder.toArrList());
-					if(!visited.containsWord(toCheck.getNeighboringWords().get(i))){	//Ignores words we already checked
+					if(dict.contains(toCheck.getNeighboringWords().get(i))){	//Ignores words we already checked
 						copyLadder.addLastWord(toCheck.getWord(i));
 						queueBFS.add(copyLadder);
 						//queueBFS.add(toCheck.getWord(i));
