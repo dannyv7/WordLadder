@@ -121,22 +121,5 @@ public class Main {
 		return words;
 	}
 	
-	/**
-	 * Removes all words from the dictionary that are not the same length as the Start word
-	 * @param len
-	 * 	Length of the start word
-	 * @param dict
-	 * 	The dictionary in String[] form
-	 * @return
-	 * 	An ArrayList with only dictionary words of the same size
-	 */
-	public static ArrayList<String> filterDictionary (int len, String[] dict){
-		ArrayList<String> temp= new ArrayList<String>(0);
-		for(int i = 0; i < dict.length; i += 1){
-			if(dict[i].length() == len){
-				temp.add(dict[i]);
-			}
-		}
-		return temp;
-	}
+	
 }

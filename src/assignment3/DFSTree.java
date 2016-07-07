@@ -9,7 +9,6 @@ import java.util.*;
  */
 public class DFSTree {
 	private Set<String> dictionary = null;
-	private Blacklist visited = new Blacklist();
 	private String target;
 	private int maxLen;
 	
