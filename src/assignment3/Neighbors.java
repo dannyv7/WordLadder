@@ -23,13 +23,22 @@ public class Neighbors {
 	 *            Modified dictionary ArrayList<String> that contains only
 	 *            Strings of the same length as s
 	 */
-	public Neighbors(String lastWord, Set<String> dictionary) {
+	public Neighbors(String lastWord, Set<String> dictionary, String target) {
+		LinkedList<Word> temp = new LinkedList<Word>();
 		for (String s : dictionary) {
-			if (isValid(lastWord, s)) {
-				validWords.add(s);
+			int checker = isValid(lastWord, s, target);
+			if (checker != -1) {
+				if(temp.isEmpty() || (temp.getFirst().getLevel() < checker)){
+					temp.addFirst(new Word(s, checker));
+				}else{ temp.add(new Word(s, checker)); }
 			}
 		}
+		
+		for(int i = 0; i < temp.size(); i += 1){
+			validWords.add(temp.remove(i).getString());
+		}
 		size = validWords.size();
+		
 	}
 
 	public ArrayList<String> getNeighboringWords() {
@@ -46,21 +55,25 @@ public class Neighbors {
 	 * @return True if there is a one letter difference between s1 and s2, false
 	 *         otherwise
 	 */
-	private boolean isValid(String s1, String s2) {
+	private int isValid(String s1, String s2, String s3) {
 		int differences = 0;
+		int matchLevel = 0;
 		for (int i = 0; i < s1.length(); i += 1) {
 			if (s1.charAt(i) != s2.charAt(i)) {
 				differences += 1;
 			}
+			if(s1.charAt(i) == s3.charAt(i)){
+				matchLevel += 1;
+			}
 		}
 
 		if (differences != 1) {
-			return false;
+			return -1;
 		} else {
-			return true;
+			return matchLevel;
 		}
 	}
-
+	
 	/**
 	 * How many neighboring words are there
 	 * 

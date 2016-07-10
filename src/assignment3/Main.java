@@ -25,6 +25,12 @@ public class Main {
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
+		
+		/* My Check 
+		System.out.println(getWordLadderBFS("HEART", "TWAIN"));
+		System.out.println(getWordLadderDFS("HEART", "TWAIN"));
+		*/
+		
 		if (debug) {
 			System.out.println("Starting junit testing...");
 			Result result = JUnitCore.runClasses(TestCases.class);
@@ -81,7 +87,10 @@ public class Main {
 		}
 		DFSTree DFSladder = new DFSTree(dict, end, start);
 		Ladder startLadder = new Ladder(start);
-		return DFSladder.runDFS(startLadder).toArrList();
+		ArrayList<String> finalLadder = DFSladder.runDFS(startLadder).toArrList();
+		if(finalLadder != null){
+			return finalLadder;
+		}else{ return new ArrayList<String>(0); }
 	}
 
 	@SuppressWarnings("unused")
@@ -139,7 +148,7 @@ public class Main {
 				/* Search exhaustively through all the neighboring words */
 				// Neighbors toCheck = new Neighbors(originLadder.getLastWord(),
 				// modifiedDict, visited);
-				Neighbors toCheck = new Neighbors(originLadder.getLastWord(), dict);
+				Neighbors toCheck = new Neighbors(originLadder.getLastWord(), dict, end);
 				for (int i = 0; i < toCheck.getSize(); i += 1) {
 					Ladder copyLadder = new Ladder(originLadder.toArrList());
 					if (dict.contains(toCheck.getNeighboringWords().get(i))) { // Ignores
@@ -156,7 +165,7 @@ public class Main {
 		}
 
 		/* Report not found */
-		return null;
+		return new ArrayList<String>(0);
 	}
 
 	public static Set<String> makeDictionary() {
@@ -164,7 +173,7 @@ public class Main {
 		Scanner infile = null;
 		try {
 			if (debug==true) {
-				infile = new Scanner(new File("five_letter_words_subset.txt"));
+				infile = new Scanner(new File("five_letter_words.txt"));
 			} else {
 				infile = new Scanner(new File("five_letter_words.txt"));
 			}

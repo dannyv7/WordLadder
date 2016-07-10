@@ -65,7 +65,10 @@ public class Ladder {
 	public void removeLastWord() {
 		rungs.remove(rungs.size() - 1);
 	}
-
+	
+	public void setEmpty(){
+		rungs = new ArrayList<String>(0);
+	}
 	/**
 	 * Retrieves the rungs of the Ladder
 	 * 

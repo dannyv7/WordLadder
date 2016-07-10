@@ -12,16 +12,19 @@ public class DFSTree {
 	private Set<String> dictionary = null;
 	private String target;
 	private int maxLen;
+	private boolean findable = true;
 
 	public DFSTree(Set<String> dict, String e, String s) {
 		dictionary = dict;
 		target = e;
-		maxLen = Main.getWordLadderBFS(s, e).size() * 2;
+		//maxLen = Main.getWordLadderBFS(s, e).size() * 2;
+		if(Main.getWordLadderBFS(s, e).size() == 0){
+			findable = false;
+		}
 	}
+	
+	
 
-	private void selectClosest(Neighbors n) {
-
-	}
 
 	/**
 	 * Recursive based Depth First Search method
@@ -35,12 +38,26 @@ public class DFSTree {
 		/* Prevent searching on the newest added word to the ladder again */
 		// visited.addWord(l.getLastWord());
 		dictionary.remove(l.getLastWord());
+		
+		/* Do not attempt unfindable ladders */
+		if(!findable){
+			l.removeLastWord();
+			return l;
+		}
 		/* DFS part, search down each neighbor path */
-		Neighbors toCheck = new Neighbors(l.getLastWord(), dictionary);
+		Neighbors toCheck = new Neighbors(l.getLastWord(), dictionary, target);
 		if (toCheck.getSize() == 0) {
 			l.removeLastWord();
 			return l;
 		} // Hit deadend
+		
+		/* Check for instant finish */
+		for(int i = 0; i < toCheck.getSize(); i += 1){
+			if(toCheck.getWord(i).equals(target)){
+				l.addLastWord(toCheck.getWord(i));
+				return l;
+			}
+		}
 
 		/*
 		 * Remove neighbor words from the dictionary; we know we will go over
