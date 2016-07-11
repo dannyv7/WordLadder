@@ -63,9 +63,16 @@ public class UserInterface {
 	 */
 	public void printLadder(ArrayList<String> ladder, String start, String end) {
 		if (ladder.isEmpty()) {
-			System.out.println("no word ladder can be found between " + start + " and " + end + ".");
+			if (start.equals(end)) {
+				System.out.println("a 0-rung word ladder exists between "+start+" and "+end+".");
+				System.out.println(start.toUpperCase());
+				System.out.println(end.toUpperCase());
+			} else {
+				System.out.println("no word ladder can be found between " + start + " and " + end + ".");
+			}
 		} else {
-			System.out.println("a " + (ladder.size() - 2) + " rung word ladder exists between " + start + " and " + end + ".");
+			System.out.println(
+					"a " + (ladder.size() - 2) + "-rung word ladder exists between " + start + " and " + end + ".");
 			for (String s : ladder) {
 				System.out.println(s);
 			}

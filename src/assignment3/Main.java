@@ -20,7 +20,7 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 public class Main {
-	final static boolean debug = false; // true to use subset dictionary and run
+	final static boolean debug = true; // true to use subset dictionary and run
 										// junit tests, false for normal
 										// operation
 	private final static boolean bfs = false; // set true to run bfs version,
@@ -50,6 +50,10 @@ public class Main {
 			}
 		}
 	}
+	
+	public static ArrayList<String> getWordLadder(String start, String end) {
+		return getWordLadderBFS(start, end);
+	}
 
 	public static ArrayList<String> getWordLadder(String start, String end, boolean bfs) {
 		if (bfs) {
@@ -70,8 +74,6 @@ public class Main {
 		end = end.toUpperCase();
 		if (start.equals(end)) {
 			ArrayList<String> res = new ArrayList<String>();
-			res.add(start);
-			res.add(end);
 			return res;
 		}
 		DFSTree DFSladder = new DFSTree(dict, end, start);
@@ -79,7 +81,12 @@ public class Main {
 		ArrayList<String> finalLadder = DFSladder.runDFS(startLadder).toArrList();
 
 		if (finalLadder != null) {
-			
+			/*
+			 * Method to reduce length of DFS:
+			 * Search forwards and backwards. Length is 2x, but big-O remains the same.
+			 * If >=2 different paths exist, this method is likely to find 2 of them.
+			 * The shorter path will be chosen. 
+			 */
 			Set<String> backdict = makeDictionary();
 			DFSTree backDFSLadder = new DFSTree(backdict, start, end);
 			Ladder backStartLadder = new Ladder(end);
@@ -112,8 +119,6 @@ public class Main {
 		end = end.toUpperCase();
 		if (start.equals(end)) {
 			ArrayList<String> res = new ArrayList<String>();
-			res.add(start);
-			res.add(end);
 			return res;
 		}
 		Queue<Ladder> queueBFS = new LinkedList<Ladder>();

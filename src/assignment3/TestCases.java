@@ -72,14 +72,11 @@ public class TestCases{
 		Scanner kb = new Scanner("aorta aorta");
 		UserInterface ui = new UserInterface(kb);
 		String[] words = ui.nextCommand();
-		ArrayList<String> bfscorrectout = new ArrayList<String>();
-		bfscorrectout.add("AORTA");
-		bfscorrectout.add("AORTA");
 		ArrayList<String> bfsactualout = Main.getWordLadder(words[0], words[1], true);
-		assertEquals(bfscorrectout, bfsactualout);
+		assertTrue(bfsactualout.isEmpty());
 		ui.printLadder(bfsactualout, words[0], words[1]);
 		String[] checkout = output.toString().trim().split("\n");
-		String[] correctout = {"a 0 rung word ladder exists between aorta and aorta.","AORTA","AORTA"};
+		String[] correctout = {"a 0-rung word ladder exists between aorta and aorta.","AORTA","AORTA"};
 		for(int i = 0;i<checkout.length;i++){
 			assertEquals(correctout[i],checkout[i].trim());
 		}
@@ -101,7 +98,7 @@ public class TestCases{
 		assertEquals(bfscorrectout, bfsactualout);
 		ui.printLadder(bfsactualout, words[0], words[1]);
 		String[] checkout = output.toString().trim().split("\n");
-		String[] correctout = {"a 2 rung word ladder exists between aorta and berts.","AORTA","BORTA","BERTA","BERTS"};
+		String[] correctout = {"a 2-rung word ladder exists between aorta and berts.","AORTA","BORTA","BERTA","BERTS"};
 		for(int i = 0;i<checkout.length;i++){
 			assertEquals(correctout[i],checkout[i].trim());
 		}
@@ -122,7 +119,7 @@ public class TestCases{
 		assertEquals(bfscorrectout, bfsactualout);
 		ui.printLadder(bfsactualout, words[0], words[1]);
 		String[] checkout = output.toString().trim().split("\n");
-		String[] correctout = {"a 2 rung word ladder exists between aorta and berts.","AORTA","BORTA","BERTA","BERTS"};
+		String[] correctout = {"a 2-rung word ladder exists between aorta and berts.","AORTA","BORTA","BERTA","BERTS"};
 		for(int i = 0;i<checkout.length;i++){
 			assertEquals(correctout[i],checkout[i].trim());
 		}
