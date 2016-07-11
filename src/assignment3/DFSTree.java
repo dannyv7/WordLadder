@@ -29,10 +29,13 @@ public class DFSTree {
 		dictionary = dict;
 		target = e;
 		//maxLen = Main.getWordLadderBFS(s, e).size() * 2;
-		findable = true;
-		//if(Main.getWordLadderBFS(s, e).size() == 0){
-		//	findable = false;
-		//}
+		
+		//findable = true;
+		
+		if(Main.getWordLadderBFS(s, e).size() == 0){
+			findable = false;
+		}
+		
 	}
 	/**
 	 * Recursive based Depth First Search method
