@@ -23,7 +23,7 @@ public class Main {
 	final static boolean debug = false; // true to use subset dictionary and run
 										// junit tests, false for normal
 										// operation
-	private final static boolean bfs = false; // set true to run bfs version,
+	private final static boolean bfs = true; // set true to run bfs version,
 												// set
 												// false to run dfs version
 

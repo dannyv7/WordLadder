@@ -45,9 +45,13 @@ public class Neighbors {
 				}else{ temp.add(new Word(s, checker)); }
 			}
 		}
-		
+		ArrayList<Word> neighborlistWord=new ArrayList<Word>();
 		for(int i = 0; i < temp.size(); i += 1){
-			validWords.add(temp.remove(i).getString());
+			neighborlistWord.add(temp.remove(i));
+		}
+		Collections.sort(neighborlistWord);
+		for(int i = 0; i < neighborlistWord.size(); i += 1){
+			validWords.add(neighborlistWord.get(i).getString());
 		}
 		size = validWords.size();
 		

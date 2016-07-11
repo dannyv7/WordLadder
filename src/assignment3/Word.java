@@ -12,7 +12,7 @@
  */
 package assignment3;
 
-public class Word {
+public class Word implements Comparable {
 	private int matchLevel = 0;
 	private String word;
 	
@@ -27,5 +27,15 @@ public class Word {
 	
 	public String getString(){
 		return word;
+	}
+
+	@Override
+	public int compareTo(Object aword) {
+		if(aword instanceof Word){
+			return matchLevel - (((Word) aword).getLevel());
+		}
+		else{
+			throw new IllegalArgumentException();
+		}
 	}
 }
