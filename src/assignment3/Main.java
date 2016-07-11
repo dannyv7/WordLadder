@@ -8,7 +8,7 @@
  * jt28593
  * <Student2 5-digit Unique No.>
  * Slip days used: <0>
- * Fall 2015
+ * Summer 2016
  */
 
 package assignment3;
@@ -23,7 +23,8 @@ public class Main {
 	final static boolean debug = false; // true to use subset dictionary and run
 										// junit tests, false for normal
 										// operation
-	private final static boolean bfs = true; // set true to run bfs version, set
+	private final static boolean bfs = false; // set true to run bfs version,
+												// set
 												// false to run dfs version
 
 	@SuppressWarnings("resource")
@@ -65,13 +66,6 @@ public class Main {
 		 * the same length as start/end
 		 */
 		Set<String> dict = makeDictionary();
-		/*
-		 * for (String s : dict) { if (s.length() != start.length()) {
-		 * dict.remove(s); } }
-		 */
-		// String[] temp = new String[0];
-		// ArrayList<String> modifiedDict = filterDictionary(start.length(),
-		// dict.toArray(temp));
 		start = start.toUpperCase();
 		end = end.toUpperCase();
 		if (start.equals(end)) {
@@ -83,7 +77,18 @@ public class Main {
 		DFSTree DFSladder = new DFSTree(dict, end, start);
 		Ladder startLadder = new Ladder(start);
 		ArrayList<String> finalLadder = DFSladder.runDFS(startLadder).toArrList();
+
 		if (finalLadder != null) {
+			
+			Set<String> backdict = makeDictionary();
+			DFSTree backDFSLadder = new DFSTree(backdict, start, end);
+			Ladder backStartLadder = new Ladder(end);
+			ArrayList<String> backLadder = backDFSLadder.runDFS(backStartLadder).toArrList();
+			if (backLadder.size() < finalLadder.size()) {
+				Collections.reverse(backLadder);
+				finalLadder=backLadder;
+			}
+			
 			return finalLadder;
 		} else {
 			return new ArrayList<String>(0);

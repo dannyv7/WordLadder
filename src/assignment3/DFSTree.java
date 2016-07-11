@@ -8,7 +8,7 @@
  * jt28593
  * <Student2 5-digit Unique No.>
  * Slip days used: <0>
- * Fall 2015
+ * Summer 2016
  */
 package assignment3;
 
@@ -23,21 +23,17 @@ import java.util.*;
 public class DFSTree {
 	private Set<String> dictionary = null;
 	private String target;
-	private int maxLen;
 	private boolean findable = true;
 
 	public DFSTree(Set<String> dict, String e, String s) {
 		dictionary = dict;
 		target = e;
 		//maxLen = Main.getWordLadderBFS(s, e).size() * 2;
-		if(Main.getWordLadderBFS(s, e).size() == 0){
-			findable = false;
-		}
+		findable = true;
+		//if(Main.getWordLadderBFS(s, e).size() == 0){
+		//	findable = false;
+		//}
 	}
-	
-	
-
-
 	/**
 	 * Recursive based Depth First Search method
 	 * 

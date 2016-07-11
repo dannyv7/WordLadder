@@ -8,7 +8,7 @@
  * jt28593
  * <Student2 5-digit Unique No.>
  * Slip days used: <0>
- * Fall 2015
+ * Summer 2016
  */
 package assignment3;
 
@@ -34,6 +34,13 @@ public class Ladder {
 		for (int i = 0; i < s.size(); i += 1) {
 			rungs.add(s.get(i));
 		}
+	}
+	/**
+	 * 
+	 * @return size of ladder
+	 */
+	public int size(){
+		return rungs.size();
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * jt28593
  * <Student2 5-digit Unique No.>
  * Slip days used: <0>
- * Fall 2015
+ * Summer 2016
  */
 package assignment3;
 import static org.junit.Assert.*;
