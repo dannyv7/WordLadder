@@ -1,5 +1,17 @@
+/* Wordladder TestCases.java
+ * EE422C Project 3 submission by
+ * Replace <...> with your actual data.
+ * Danny Vo
+ * dpv292
+ * <Student1 5-digit Unique No.>
+ * James Tsao
+ * jt28593
+ * <Student2 5-digit Unique No.>
+ * Slip days used: <0>
+ * Fall 2015
+ */
 package assignment3;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -123,9 +135,8 @@ public class TestCases{
 		Scanner kb = new Scanner("aorta ables");
 		UserInterface ui = new UserInterface(kb);
 		String[] words = ui.nextCommand();
-		ArrayList<String> bfscorrectout = null;
 		ArrayList<String> bfsactualout = Main.getWordLadder(words[0], words[1], true);
-		assertEquals(bfscorrectout, bfsactualout);
+		assertTrue(bfsactualout.isEmpty());
 		ui.printLadder(bfsactualout, words[0], words[1]);
 		String[] checkout = output.toString().trim().split("\n");
 		String[] correctout = {"no word ladder can be found between aorta and ables."};
@@ -140,9 +151,8 @@ public class TestCases{
 		Scanner kb = new Scanner("aorta ables");
 		UserInterface ui = new UserInterface(kb);
 		String[] words = ui.nextCommand();
-		ArrayList<String> bfscorrectout = null;
 		ArrayList<String> bfsactualout = Main.getWordLadder(words[0], words[1], false);
-		assertEquals(bfscorrectout, bfsactualout);
+		assertTrue(bfsactualout.isEmpty());
 		ui.printLadder(bfsactualout, words[0], words[1]);
 		String[] checkout = output.toString().trim().split("\n");
 		String[] correctout = {"no word ladder can be found between aorta and ables."};

@@ -1,3 +1,15 @@
+/* Wordladder UserInterface.java
+ * EE422C Project 3 submission by
+ * Replace <...> with your actual data.
+ * Danny Vo
+ * dpv292
+ * <Student1 5-digit Unique No.>
+ * James Tsao
+ * jt28593
+ * <Student2 5-digit Unique No.>
+ * Slip days used: <0>
+ * Fall 2015
+ */
 package assignment3;
 
 import java.util.ArrayList;
@@ -50,7 +62,7 @@ public class UserInterface {
 	 *            word ladder returned by dfs or bfs
 	 */
 	public void printLadder(ArrayList<String> ladder, String start, String end) {
-		if (ladder == null) {
+		if (ladder.isEmpty()) {
 			System.out.println("no word ladder can be found between " + start + " and " + end + ".");
 		} else {
 			System.out.println("a " + (ladder.size() - 2) + " rung word ladder exists between " + start + " and " + end + ".");

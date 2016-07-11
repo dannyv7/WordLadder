@@ -1,3 +1,15 @@
+/* Wordladder DFSTree.java
+ * EE422C Project 3 submission by
+ * Replace <...> with your actual data.
+ * Danny Vo
+ * dpv292
+ * <Student1 5-digit Unique No.>
+ * James Tsao
+ * jt28593
+ * <Student2 5-digit Unique No.>
+ * Slip days used: <0>
+ * Fall 2015
+ */
 package assignment3;
 
 import java.util.*;

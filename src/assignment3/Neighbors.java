@@ -1,3 +1,15 @@
+/* Wordladder Neighbors.java
+ * EE422C Project 3 submission by
+ * Replace <...> with your actual data.
+ * Danny Vo
+ * dpv292
+ * <Student1 5-digit Unique No.>
+ * James Tsao
+ * jt28593
+ * <Student2 5-digit Unique No.>
+ * Slip days used: <0>
+ * Fall 2015
+ */
 package assignment3;
 
 import java.util.*;
@@ -28,7 +40,7 @@ public class Neighbors {
 		for (String s : dictionary) {
 			int checker = isValid(lastWord, s, target);
 			if (checker != -1) {
-				if(temp.isEmpty() || (temp.getFirst().getLevel() < checker)){
+				if(temp.isEmpty() || (temp.getFirst().getLevel() < checker) || s.equals(target)){
 					temp.addFirst(new Word(s, checker));
 				}else{ temp.add(new Word(s, checker)); }
 			}

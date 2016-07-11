@@ -1,8 +1,8 @@
 /* WORD LADDER Main.java
  * EE422C Project 3 submission by
  * Replace <...> with your actual data.
- * <Student1 Name>
- * <Student1 EID>
+ * Danny Vo
+ * dpv292
  * <Student1 5-digit Unique No.>
  * James Tsao
  * jt28593
@@ -20,17 +20,14 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 public class Main {
-	final static boolean debug = true;
-	private final static boolean bfs = true; //set true to run bfs version, set false to run dfs version
+	final static boolean debug = false; // true to use subset dictionary and run
+										// junit tests, false for normal
+										// operation
+	private final static boolean bfs = true; // set true to run bfs version, set
+												// false to run dfs version
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
-		
-		/* My Check 
-		System.out.println(getWordLadderBFS("HEART", "TWAIN"));
-		System.out.println(getWordLadderDFS("HEART", "TWAIN"));
-		*/
-		
 		if (debug) {
 			System.out.println("Starting junit testing...");
 			Result result = JUnitCore.runClasses(TestCases.class);
@@ -39,7 +36,7 @@ public class Main {
 			}
 			System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
 			System.out.println("Junit testing done!");
-			System.out.println(result.getFailureCount()+" failed tests.");
+			System.out.println(result.getFailureCount() + " failed tests.");
 		} else {
 			Scanner kb = new Scanner(System.in);
 			UserInterface ui = new UserInterface(kb);
@@ -52,16 +49,15 @@ public class Main {
 			}
 		}
 	}
-	
-	public static ArrayList<String> getWordLadder(String start, String end, boolean bfs){
-		if(bfs){
-			return getWordLadderBFS(start,end);
-		}
-		else{
-			return getWordLadderDFS(start,end);
+
+	public static ArrayList<String> getWordLadder(String start, String end, boolean bfs) {
+		if (bfs) {
+			return getWordLadderBFS(start, end);
+		} else {
+			return getWordLadderDFS(start, end);
 		}
 	}
-	
+
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
 
 		/*
@@ -69,15 +65,14 @@ public class Main {
 		 * the same length as start/end
 		 */
 		Set<String> dict = makeDictionary();
-		for (String s : dict) {
-			if (s.length() != start.length()) {
-				dict.remove(s);
-			}
-		}
+		/*
+		 * for (String s : dict) { if (s.length() != start.length()) {
+		 * dict.remove(s); } }
+		 */
 		// String[] temp = new String[0];
 		// ArrayList<String> modifiedDict = filterDictionary(start.length(),
 		// dict.toArray(temp));
-		start=start.toUpperCase();
+		start = start.toUpperCase();
 		end = end.toUpperCase();
 		if (start.equals(end)) {
 			ArrayList<String> res = new ArrayList<String>();
@@ -88,9 +83,11 @@ public class Main {
 		DFSTree DFSladder = new DFSTree(dict, end, start);
 		Ladder startLadder = new Ladder(start);
 		ArrayList<String> finalLadder = DFSladder.runDFS(startLadder).toArrList();
-		if(finalLadder != null){
+		if (finalLadder != null) {
 			return finalLadder;
-		}else{ return new ArrayList<String>(0); }
+		} else {
+			return new ArrayList<String>(0);
+		}
 	}
 
 	@SuppressWarnings("unused")
@@ -101,17 +98,12 @@ public class Main {
 		 * the same length as start/end
 		 */
 		Set<String> dict = makeDictionary();
-		for (String s : dict) {
-			if (s.length() != start.length()) {
-				dict.remove(s);
-			}
-		}
-		// String[] temp = new String[0];
-		// ArrayList<String> modifiedDict = filterDictionary(start.length(),
-		// dict.toArray(temp));
-
-		/* Actual BFS tree generation */
-		start=start.toUpperCase();
+		/*
+		 * for (String s : dict) { if (s.length() != start.length()) {
+		 * dict.remove(s); } }
+		 */
+		/* BFS tree generation */
+		start = start.toUpperCase();
 		end = end.toUpperCase();
 		if (start.equals(end)) {
 			ArrayList<String> res = new ArrayList<String>();
@@ -120,7 +112,6 @@ public class Main {
 			return res;
 		}
 		Queue<Ladder> queueBFS = new LinkedList<Ladder>();
-		// Blacklist visited = new Blacklist();
 		ArrayList<String> firstLadder = new ArrayList<String>();
 		queueBFS.add(new Ladder(start)); // Treat start as the first "node"
 
@@ -146,8 +137,6 @@ public class Main {
 				dict.remove(queueBFS.element().getLastWord());
 				Ladder originLadder = queueBFS.remove();
 				/* Search exhaustively through all the neighboring words */
-				// Neighbors toCheck = new Neighbors(originLadder.getLastWord(),
-				// modifiedDict, visited);
 				Neighbors toCheck = new Neighbors(originLadder.getLastWord(), dict, end);
 				for (int i = 0; i < toCheck.getSize(); i += 1) {
 					Ladder copyLadder = new Ladder(originLadder.toArrList());
@@ -168,12 +157,13 @@ public class Main {
 		return new ArrayList<String>(0);
 	}
 
+	@SuppressWarnings("unused")
 	public static Set<String> makeDictionary() {
 		Set<String> words = new HashSet<String>();
 		Scanner infile = null;
 		try {
-			if (debug==true) {
-				infile = new Scanner(new File("five_letter_words.txt"));
+			if (debug == true) {
+				infile = new Scanner(new File("five_letter_words_subset.txt"));
 			} else {
 				infile = new Scanner(new File("five_letter_words.txt"));
 			}
