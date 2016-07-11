@@ -22,7 +22,11 @@ import java.util.*;
  *
  */
 public class Ladder {
-	private ArrayList<String> rungs = new ArrayList<String>(0);
+	private ArrayList<String> rungs;
+	
+	public Ladder(){
+		rungs = new ArrayList<String>(0);
+	}
 
 	/**
 	 * Constructs a Ladder object from a pre-existing ArrayList<String>
@@ -31,6 +35,7 @@ public class Ladder {
 	 *            An ArrayList<String> to copy to the Ladder
 	 */
 	public Ladder(ArrayList<String> s) {
+		rungs =  new ArrayList<String>(0);
 		for (int i = 0; i < s.size(); i += 1) {
 			rungs.add(s.get(i));
 		}
@@ -50,6 +55,7 @@ public class Ladder {
 	 *            The String to attach as a 'rung'
 	 */
 	public Ladder(String s) {
+		rungs = new ArrayList<String>(0);
 		rungs.add(s);
 	}
 

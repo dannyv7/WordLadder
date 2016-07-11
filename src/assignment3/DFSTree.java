@@ -28,15 +28,14 @@ public class DFSTree {
 	public DFSTree(Set<String> dict, String e, String s) {
 		dictionary = dict;
 		target = e;
-		//maxLen = Main.getWordLadderBFS(s, e).size() * 2;
-		
-		//findable = true;
-		
-		if(Main.getWordLadderBFS(s, e).size() == 0){
-			findable = false;
-		}
-		
+		// maxLen = Main.getWordLadderBFS(s, e).size() * 2;
+
+		findable = true;
+		/*
+		 * if(Main.getWordLadderBFS(s, e).size() == 0){ findable = false; }
+		 */
 	}
+
 	/**
 	 * Recursive based Depth First Search method
 	 * 
@@ -49,9 +48,9 @@ public class DFSTree {
 		/* Prevent searching on the newest added word to the ladder again */
 		// visited.addWord(l.getLastWord());
 		dictionary.remove(l.getLastWord());
-		
+
 		/* Do not attempt unfindable ladders */
-		if(!findable){
+		if (!findable) {
 			l.removeLastWord();
 			return l;
 		}
@@ -61,10 +60,10 @@ public class DFSTree {
 			l.removeLastWord();
 			return l;
 		} // Hit deadend
-		
+
 		/* Check for instant finish */
-		for(int i = 0; i < toCheck.getSize(); i += 1){
-			if(toCheck.getWord(i).equals(target)){
+		for (int i = 0; i < toCheck.getSize(); i += 1) {
+			if (toCheck.getWord(i).equals(target)) {
 				l.addLastWord(toCheck.getWord(i));
 				return l;
 			}
@@ -103,12 +102,12 @@ public class DFSTree {
 			/* Recursive search, return ladder if correct */
 			else {
 				temp = runDFS(temp);
-				if (temp != null && temp.getLastWord().equals(target)) {
+				if (temp != null && temp.size() != 0 && temp.getLastWord().equals(target)) {
 					return temp;
 				}
 			}
 		}
-		return null;
+		return new Ladder();
 	}
 
 }
